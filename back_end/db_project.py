@@ -36,12 +36,12 @@ def create_project(p_id, project):
 
 
 def query_project(p_id, project):
-    restatus = {'restatus': '0'}
+    restatus = {'restatus': 0}
     myquery = {"pID": p_id}
     try:
         data = project.find_one(myquery)
         data.pop('_id')
-        restatus['restatus'] = '1'
+        restatus['restatus'] = 1
     except:
         return restatus
     data = {**restatus, **data}
@@ -91,6 +91,41 @@ def project_check(hw1, hw2, p, x1, x2, hardware, project):
             err2 = 0
 
     if err1 == 1 and err2 == 1:
+        return {"restatus": 1}
+    else:
+        return {"restatus": 0}
+
+
+def hardware_check_in(hw1, hw2, p, x1, x2, hardware, project):
+
+    re1 = hw1.check_in(x1)
+    re2 = hw2.check_in(x2)
+    print("p", p, re1, re2)
+    if re1 == 1:
+        try:
+            p["hw1_checked"] -= x1
+            # print(p)
+            update_project(p, project)
+            # print("successfully updated project")
+            db_hardware.update_hardware(hw1, hardware)
+            print("Hw1 successfully checked out")
+        except:
+            print("Hw1 wrong")
+            return_msg = db_hardware.sync_hardware('001', hardware, hw1)
+            re1 = 0
+
+    if re2 == 1:
+        try:
+            p["hw2_checked"] -= x2
+            update_project(p, project)
+            db_hardware.update_hardware(hw2, hardware)
+            print("Hw2 successfully checked out")
+        except:
+            print("Hw2 wrong")
+            return_msg = db_hardware.sync_hardware('002', hardware, hw2)
+            re2 = 0
+
+    if re1 == 1 and re2 == 1:
         return {"restatus": 1}
     else:
         return {"restatus": 0}

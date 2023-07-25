@@ -43,7 +43,7 @@ export const ProjectForm = () => {
               console.log(data["restatus"]);
               console.log(data.restatus);
 
-              if (data.restatus === "1") {
+              if (data.restatus === 1) {
                 console.log("good");
                 setMessage(
                   <div>

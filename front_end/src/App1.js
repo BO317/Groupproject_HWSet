@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
+import { NewUserForm } from "./components/NewUserForm";
 
 function App1() {
   const [data, setData] = useState([{}]);
@@ -23,6 +24,8 @@ function App1() {
 
       <Container>
         <UserForm></UserForm>
+        <hr></hr>
+        <NewUserForm></NewUserForm>
         {/* <Users users={data}></Users> */}
       </Container>
     </div>

@@ -1,22 +1,13 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Message } from "semantic-ui-react";
 import { Navigate } from "react-router-dom";
-import { Alert } from "react-native";
-// import { useAlert } from "react-alert";
 
-export const UserForm = () => {
+export const NewUserForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const [frist, setFrist] = useState("");
+  const [last, setLast] = useState("");
   const [data, setData] = useState([{}]);
-
-  const [goToDashboard, setGoToDashboaed] = useState(false);
-
-  // const alert = useAlert();
-
-  if (goToDashboard) {
-    return <Navigate to="/Dashboard" />;
-  }
 
   return (
     <Form>
@@ -31,13 +22,23 @@ export const UserForm = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         ></Input>
+        <Input
+          placeholder="fristname"
+          value={frist}
+          onChange={(e) => setFrist(e.target.value)}
+        ></Input>
+        <Input
+          placeholder="lastname"
+          value={last}
+          onChange={(e) => setLast(e.target.value)}
+        ></Input>
       </Form.Field>
       <Form.Field>
         <Button
           onClick={async () => {
-            const user = { username, password };
+            const user = { name: { frist, last }, username, password };
 
-            fetch("/queryuser", {
+            fetch("/newuser", {
               method: "POST",
               headers: {
                 "Content-Type": "application.json",
@@ -50,16 +51,16 @@ export const UserForm = () => {
                 console.log(data);
               });
 
-            console.log(data["dbstatus"]);
-            if (data.dbstatus === 1) {
-              console.log("good");
-              setGoToDashboaed(true);
+            console.log(data.dbstatus);
+
+            if (data.restatus === 1) {
+              console.log("new user created");
             } else {
-              console.log("wrong Username or Password. Try Agian!");
+              console.log("username exist");
             }
           }}
         >
-          Login
+          New User Sign up
         </Button>
       </Form.Field>
     </Form>

@@ -45,3 +45,14 @@ class HWSet:
         This method should update the number of units available after check_in."""
         self.__availability += qty
         self.__checkedout -= qty
+
+        if self.__availability > self.__capacity:
+            self.__availability = self.__capacity
+            return 0
+
+        elif self.__checkedout < 0:
+            self.__checkedout = 0
+            return 0
+
+        else:
+            return 1

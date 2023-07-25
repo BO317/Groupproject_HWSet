@@ -101,6 +101,38 @@ def checkout():
         return data
 
 
+@app.route('/hwcheckin', methods=['POST'])
+def hw_checkin():
+
+    myquery = request.get_data(as_text=True)
+    myquery = json.loads(myquery)
+
+    print(type(myquery), myquery)
+    p_ID = str(myquery["projectIDCheckIn"])
+    x1 = int(myquery["hw1Checkin"])
+    x2 = int(myquery["hw2Checkin"])
+
+    p = db_project.query_project(p_ID, project)
+    print(p, p_ID, x1, x2)
+
+    if p['restatus'] == 1:
+        if x1 > p["hw1_checked"] or x2 > p["hw1_checked"]:
+            data = {"restatus": 0,
+                    "message": "Required checkin amount exceed the project current checked amount."}
+            print("11111111111")
+            return data
+        else:
+            data = db_project.hardware_check_in(
+                hw1, hw2, p, x1, x2, hardware, project)
+            print(data)
+            print("222222222222")
+            return data
+    else:
+        data = {"restatus": 0, "message": "No project found."}
+        print("3333333333")
+        return data
+
+
 @app.route('/queryuser', methods=['POST'])
 def queryUser():
     myquery = request.get_data(as_text=True)
@@ -108,6 +140,19 @@ def queryUser():
     myquery = json.loads(myquery)
     data = db_user.db_query_user(myquery, user)
     print(data)
+    return data
+
+
+@app.route('/newuser', methods=['POST'])
+def newUser():
+
+    myquery = request.get_data(as_text=True)
+    myquery = json.loads(myquery)
+    # print(myquery)
+
+    data = db_user.create_user(myquery, user)
+    print(data)
+
     return data
 
 
