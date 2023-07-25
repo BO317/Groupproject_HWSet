@@ -7,7 +7,12 @@ import db_project
 import certifi
 from pymongo import MongoClient
 
-uri = "mongodb+srv://bo317:1234@cluster0.yrpm09t.mongodb.net/?retryWrites=true&w=majority"
+import constants
+service_key = constants.API_KEY_Mongo
+
+
+uri = f"mongodb+srv://bo317:{service_key}@cluster0.yrpm09t.mongodb.net/?retryWrites=true&w=majority"
+
 ca = certifi.where()
 # Use Cluster0
 client = MongoClient(uri, tlsCAFile=ca)

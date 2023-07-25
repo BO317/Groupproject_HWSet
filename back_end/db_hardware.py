@@ -4,15 +4,6 @@ from pymongo import MongoClient
 import certifi
 from hardwareSet import HWSet
 
-# uri = "mongodb+srv://bo317:1234@cluster0.yrpm09t.mongodb.net/?retryWrites=true&w=majority"
-# ca = certifi.where()
-# # Use Cluster0
-# client = MongoClient(uri, tlsCAFile=ca)
-
-
-# db = client.test
-# hardware = server.db.hardwares
-
 
 def create_hardware(id, capacity, hardware):
 

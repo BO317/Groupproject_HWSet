@@ -4,18 +4,6 @@ import certifi
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
-# uri = "mongodb+srv://bo317:1234@cluster0.yrpm09t.mongodb.net/?retryWrites=true&w=majority"
-# ca = certifi.where()
-
-# Use this cluster
-# client = MongoClient(uri, server_api=ServerApi('1'), tlsCAFile=ca)
-
-
-# collection_handle = db.users
-# myquery = {"username": "bo123"}
-# x = collection_handle.find_one(myquery)
-# print(x)
-
 
 def db_query_user(query_doc, user):
     dbstatus = {'dbstatus': 0}
