@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Input, Button } from "semantic-ui-react";
 import { Navigate } from "react-router-dom";
 
@@ -9,6 +9,26 @@ export const ProjectForm = () => {
   const [data, setData] = useState([{}]);
 
   const [message, setMessage] = useState();
+
+  useEffect(() => {
+    if (data.restatus === 1) {
+      console.log("good");
+      setMessage(
+        <div>
+          <p>Project ID : {data.pID}</p>
+          <p>hw1_checked : {data.hw1_checked}</p>
+          <p>hw2_checked : {data.hw2_checked}</p>
+        </div>
+      );
+    } else {
+      console.log("wrong");
+      setMessage(
+        <div>
+          <p>Can't find it!</p>
+        </div>
+      );
+    }
+  }, [data]);
 
   return (
     <div>
@@ -42,24 +62,6 @@ export const ProjectForm = () => {
 
               console.log(data["restatus"]);
               console.log(data.restatus);
-
-              if (data.restatus === 1) {
-                console.log("good");
-                setMessage(
-                  <div>
-                    <p>Project ID : {data.pID}</p>
-                    <p>hw1_checked : {data.hw1_checked}</p>
-                    <p>hw2_checked : {data.hw2_checked}</p>
-                  </div>
-                );
-              } else {
-                console.log("wrong");
-                setMessage(
-                  <div>
-                    <p>Can't find it!</p>
-                  </div>
-                );
-              }
             }}
           >
             Project Check

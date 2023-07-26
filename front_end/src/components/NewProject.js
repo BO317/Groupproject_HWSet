@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Input, Button } from "semantic-ui-react";
 
 export const NewProject = () => {
@@ -7,7 +7,25 @@ export const NewProject = () => {
 
   const [data, setData] = useState([{}]);
 
-  const [message, setMessage] = useState();
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    if (data.restatus === 1) {
+      console.log("good");
+      setMessage(
+        <div>
+          <p>Good!</p>
+        </div>
+      );
+    } else {
+      console.log("wrong");
+      setMessage(
+        <div>
+          <p>Project ID exist</p>
+        </div>
+      );
+    }
+  }, [data]);
 
   return (
     <div>
@@ -41,22 +59,6 @@ export const NewProject = () => {
 
               console.log(data["restatus"]);
               console.log(data.restatus);
-
-              if (data.restatus === 1) {
-                console.log("good");
-                setMessage(
-                  <div>
-                    <p>Good!</p>
-                  </div>
-                );
-              } else {
-                console.log("wrong");
-                setMessage(
-                  <div>
-                    <p>Wrong!</p>
-                  </div>
-                );
-              }
             }}
           >
             New Project

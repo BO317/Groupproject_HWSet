@@ -6,15 +6,15 @@ from pymongo.server_api import ServerApi
 
 
 def db_query_user(query_doc, user):
-    dbstatus = {'dbstatus': 0}
+    restatus = {'restatus': 0}
 
     data = user.find_one(query_doc)
     try:
         data.pop('_id')
-        dbstatus['dbstatus'] = 1
+        restatus['restatus'] = 1
     except:
-        return dbstatus
-    data = {**dbstatus, **data}
+        return restatus
+    data = {**restatus, **data}
     return data
 
 # def create_project(p_id, project):
@@ -38,19 +38,19 @@ def db_query_user(query_doc, user):
 
 
 def create_user(query_doc, user):
-    dbstatus = {'dbstatus': 0}
+    restatus = {'restatus': 0}
     print("trying to create new user")
     data = user.find_one({"username": query_doc["username"]})
 
     try:
         data.pop('_id')
         print("username exist")
-        return {'dbstatus': 0}
+        return {'restatus': 0}
 
     except:
         user.insert_one(query_doc)
         print("new user created")
-        return {'dbstatus': 1}
+        return {'restatus': 1}
 
 
 def db_query_all(user):

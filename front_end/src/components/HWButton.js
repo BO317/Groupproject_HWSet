@@ -4,7 +4,24 @@ import { Button } from "semantic-ui-react";
 function HWButton() {
   const [data, setData] = useState([{}]);
 
-  const [message, setMessage] = useState("Current HW status");
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    setMessage(
+      <div className="col">
+        <h1>Current hardware resource:</h1>
+        {data.map((hw) => (
+          <div>
+            <p>Hardware: {hw.hwID}</p>
+            <p>Availability: {hw.availability}</p>
+            <p>Capacity: {hw.capacity}</p>
+            <p>Checkedout:{hw.checkedout}</p>
+            <hr></hr>
+          </div>
+        ))}
+      </div>
+    );
+  }, [data]);
 
   return (
     <div>
@@ -17,20 +34,6 @@ function HWButton() {
               console.log(data);
             });
 
-          setMessage(
-            <div className="col">
-              <h1>Current hardware resource:</h1>
-              {data.map((hw) => (
-                <div>
-                  <p>Hardware: {hw.hwID}</p>
-                  <p>Availability: {hw.availability}</p>
-                  <p>Capacity: {hw.capacity}</p>
-                  <p>Checkedout:{hw.checkedout}</p>
-                  <hr></hr>
-                </div>
-              ))}
-            </div>
-          );
           console.log(message);
         }}
       >
