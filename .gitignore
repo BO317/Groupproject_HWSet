@@ -1,1 +1,4 @@
 front_end/node_modules
+
+# Local Netlify folder
+.netlify
