@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import db_user
 import json
 from hardwareSet import HWSet
@@ -6,6 +6,8 @@ import db_hardware
 import db_project
 import certifi
 from pymongo import MongoClient
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+
 
 import constants
 service_key = constants.API_KEY_Mongo
@@ -25,6 +27,17 @@ project = db.projects
 
 
 app = Flask(__name__)
+
+app.secret_key = 'your_secret_key'
+
+# Login management
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+class User(UserMixin):
+    pass
+
 
 hw1 = db_hardware.ini_hardware('001', hardware)
 hw2 = db_hardware.ini_hardware('002', hardware)
@@ -144,7 +157,38 @@ def queryUser():
     print(myquery)
     myquery = json.loads(myquery)
     data = db_user.db_query_user(myquery, user)
+    if data['restatus'] == 1:
+        user1 = User()
+        print(data["username"])
+        user1.id = data["username"]
+        login_user(user1)
+        return jsonify(data), 200
     print(data)
+    return data
+
+
+@login_manager.user_loader
+def user_loader(username):
+    user = User()
+    user.id = username
+    return user
+
+
+@app.route('/logout', methods=['POST'])
+# @login_required
+def logout():
+    print("asdfasdfasdfasdfasdf")
+    logout_user()
+    return jsonify({'message': 'Logged out'}), 200
+
+
+@app.route('/user_info', methods=['GET'])
+@login_required
+def user_info():
+    try:
+        data = jsonify({'username': current_user.id, 'isLoggedIn': True})
+    except:
+        data = jsonify({'isLoggedIn': False}), 200
     return data
 
 

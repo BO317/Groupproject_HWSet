@@ -7,29 +7,36 @@ import {
   Route,
   Routes,
   Switch,
+  Redirect,
+  Navigate,
 } from "react-router-dom";
-import Home from "./pages/Home";
+import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import { NewUserForm } from "./components/NewUserForm";
 
 function App1() {
-  const [data, setData] = useState([{}]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <div>
       <Routes>
-        {/* <Route path="/home" element = {<Home />} /> */}
+        <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        {/* <Route path="/main" component={Dashboard} /> */}
+        {/* <Route path="/" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+        <PrivateRoute
+          path="/main"
+          element={<Dashboard setIsLoggedIn={setIsLoggedIn} />}
+          isLoggedIn={isLoggedIn}
+        /> */}
       </Routes>
-
-      <Container>
-        <UserForm></UserForm>
-        <hr></hr>
-        <NewUserForm></NewUserForm>
-        {/* <Users users={data}></Users> */}
-      </Container>
     </div>
   );
 }
+
+// // 自定义一个 PrivateRoute 组件，用于控制是否允许未登录用户访问该页面
+// const PrivateRoute = ({ element: Element, isLoggedIn, ...rest }) => {
+//   return isLoggedIn ? <Element {...rest} /> : <Navigate to="/" />;
+// };
 
 export default App1;

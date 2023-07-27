@@ -17,7 +17,7 @@ export const NewProject = () => {
           <p>Good!</p>
         </div>
       );
-    } else {
+    } else if (data.restatus === 0) {
       console.log("wrong");
       setMessage(
         <div>

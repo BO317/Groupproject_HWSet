@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Button, Message } from "semantic-ui-react";
 import { Navigate } from "react-router-dom";
-import { Alert } from "react-native";
+import { NewUserForm } from "./NewUserForm";
 // import { useAlert } from "react-alert";
 
 export const UserForm = () => {
@@ -23,9 +23,15 @@ export const UserForm = () => {
       setGoToDashboaed(true);
     } else if (data.restatus === 0) {
       setMessage("wrong Username or Password. Try Agian!");
-      console.log("wrong Username or Password. Try Agian!");
+      alert("wrong Username or Password. Try Agian!");
     }
   }, [data]);
+
+  const [isTextVisible, setIsTextVisible] = useState(false);
+
+  const handleButtonClick = () => {
+    setIsTextVisible(true); // Toggle the value of isTextVisible
+  };
 
   if (goToDashboard) {
     return <Navigate to="/Dashboard" />;
@@ -65,11 +71,15 @@ export const UserForm = () => {
                 });
             }}
           >
-            Login
+            Sing In
           </Button>
+
+          <Button onClick={handleButtonClick}>Sing Up</Button>
         </Form.Field>
       </Form>
-      {message}
+
+      {/* {message} */}
+      {isTextVisible && <NewUserForm />}
     </div>
   );
 };

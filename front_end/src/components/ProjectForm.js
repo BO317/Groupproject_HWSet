@@ -20,7 +20,7 @@ export const ProjectForm = () => {
           <p>hw2_checked : {data.hw2_checked}</p>
         </div>
       );
-    } else {
+    } else if (data.restatus === 0) {
       console.log("wrong");
       setMessage(
         <div>
