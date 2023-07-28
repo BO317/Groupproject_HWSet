@@ -14,7 +14,6 @@ function Dashboard() {
   const [currentUser, setCurrentUser] = useState("");
 
   useEffect(() => {
-    // 发送网络请求获取登录状态
     fetch("/user_info")
       .then((response) => response.json())
       .then((data) => {
@@ -23,15 +22,12 @@ function Dashboard() {
         // console.log(data);
         if (isLoggedIn) {
           console.log(goToLogin);
-          // 如果已登录，则跳转到主页
         } else {
           setGoToLogin(true);
-          // 如果未登录，可选择跳转到登录页面或其他操作
         }
       })
       .catch((error) => {
         setGoToLogin(true);
-        // 可选择在请求失败时跳转到登录页面或其他操作
       });
   }, []);
 
@@ -41,20 +37,17 @@ function Dashboard() {
 
   const handleLogout = async () => {
     try {
-      // 发送注销请求至后端
       const response = await fetch("/logout", {
         method: "POST",
       });
 
       if (response.ok) {
-        // 注销成功，跳转至登录页面
         console.log(response);
         navigate("/");
       } else {
-        // 处理注销失败的情况
       }
     } catch (error) {
-      console.error("注销请求失败:", error);
+      console.error("ERROR:", error);
     }
   };
 
