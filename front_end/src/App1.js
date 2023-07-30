@@ -34,9 +34,4 @@ function App1() {
   );
 }
 
-// // 自定义一个 PrivateRoute 组件，用于控制是否允许未登录用户访问该页面
-// const PrivateRoute = ({ element: Element, isLoggedIn, ...rest }) => {
-//   return isLoggedIn ? <Element {...rest} /> : <Navigate to="/" />;
-// };
-
 export default App1;

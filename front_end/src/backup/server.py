@@ -7,7 +7,6 @@ import db_project
 import certifi
 from pymongo import MongoClient
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-import os
 
 
 import constants
@@ -27,8 +26,8 @@ user = db.users
 project = db.projects
 
 
-# app = Flask(__name__)
-app = Flask(__name__, static_folder='../front_end/build', static_url_path='/')
+app = Flask(__name__)
+
 app.secret_key = 'your_secret_key'
 
 # Login management
@@ -45,13 +44,8 @@ hw2 = db_hardware.ini_hardware('002', hardware)
 
 
 @app.route('/')
-def index():
-    return app.send_static_file('index.html')
-
-
-@app.errorhandler(404)
-def not_found(e):
-    return app.send_static_file('index.html')
+def sayHello():
+    return 'Hello Python'
 
 
 # @app.route('/user')
@@ -212,4 +206,4 @@ def newUser():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=False, port=os.environ.get('PORT', 8000))
+    app.run(port=8000, debug=True)
