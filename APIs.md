@@ -1,5 +1,7 @@
 ## API Documentation for React.js Frontend Engineers
 
+This API documentation provides details on various endpoints and functions that React.js frontend engineers can use to interact with the backend server effectively.
+
 ### 1. Hardware Information Endpoint
 
 - **Endpoint:** `/hardware`
@@ -10,29 +12,25 @@
 **Usage Example (React.js - Fetch API):**
 
 ```jsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 const HardwareInfoComponent = () => {
   const [hardwareData, setHardwareData] = useState([]);
 
   useEffect(() => {
-    fetch('/hardware')
-      .then(response => response.json())
-      .then(data => {
+    fetch("/hardware")
+      .then((response) => response.json())
+      .then((data) => {
         // Handle the hardware data here
         setHardwareData(data);
       })
-      .catch(error => {
+      .catch((error) => {
         // Handle any error that occurs during the API call
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   }, []);
 
-  return (
-    <div>
-      {/* Render the hardware data here */}
-    </div>
-  );
+  return <div>{/* Render the hardware data here */}</div>;
 };
 
 export default HardwareInfoComponent;
@@ -49,42 +47,42 @@ export default HardwareInfoComponent;
 **Usage Example (React.js - Fetch API):**
 
 ```jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const NewProjectComponent = () => {
-  const [projectID, setProjectID] = useState('');
+  const [projectID, setProjectID] = useState("");
   const [result, setResult] = useState(null);
 
   const handleCreateProject = () => {
-    const newProjectData = { "projectID": projectID };
+    const newProjectData = { projectID: projectID };
 
-    fetch('/newproject', {
-      method: 'POST',
+    fetch("/newproject", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(newProjectData)
+      body: JSON.stringify(newProjectData),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         // Handle the response data here
         setResult(data);
       })
-      .catch(error => {
+      .catch((error) => {
         // Handle any error that occurs during the API call
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   };
 
   return (
     <div>
-      <input type="text" value={projectID} onChange={e => setProjectID(e.target.value)} />
+      <input
+        type="text"
+        value={projectID}
+        onChange={(e) => setProjectID(e.target.value)}
+      />
       <button onClick={handleCreateProject}>Create Project</button>
-      {result && (
-        <div>
-          {/* Render the result data here */}
-        </div>
-      )}
+      {result && <div>{/* Render the result data here */}</div>}
     </div>
   );
 };
@@ -103,42 +101,42 @@ export default NewProjectComponent;
 **Usage Example (React.js - Fetch API):**
 
 ```jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const QueryProjectComponent = () => {
-  const [projectID, setProjectID] = useState('');
+  const [projectID, setProjectID] = useState("");
   const [projectData, setProjectData] = useState(null);
 
   const handleQueryProject = () => {
-    const queryData = { "projectID": projectID };
+    const queryData = { projectID: projectID };
 
-    fetch('/queryproject', {
-      method: 'POST',
+    fetch("/queryproject", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(queryData)
+      body: JSON.stringify(queryData),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         // Handle the queried project data here
         setProjectData(data);
       })
-      .catch(error => {
+      .catch((error) => {
         // Handle any error that occurs during the API call
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   };
 
   return (
     <div>
-      <input type="text" value={projectID} onChange={e => setProjectID(e.target.value)} />
+      <input
+        type="text"
+        value={projectID}
+        onChange={(e) => setProjectID(e.target.value)}
+      />
       <button onClick={handleQueryProject}>Query Project</button>
-      {projectData && (
-        <div>
-          {/* Render the project data here */}
-        </div>
-      )}
+      {projectData && <div>{/* Render the project data here */}</div>}
     </div>
   );
 };
@@ -212,58 +210,64 @@ const HardwareCheckoutComponent = () => {
 **Usage Example (React.js - Fetch API):**
 
 ```jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const HardwareCheckinComponent = () => {
-  const [projectID, setProjectID] = useState('');
-  const [hw1Checkin, setHw1Checkin] = useState('');
-  const [hw2Checkin, setHw2Checkin] = useState('');
+  const [projectID, setProjectID] = useState("");
+  const [hw1Checkin, setHw1Checkin] = useState("");
+  const [hw2Checkin, setHw2Checkin] = useState("");
   const [result, setResult] = useState(null);
 
   const handleHardwareCheckin = () => {
     const checkinData = {
-      "projectIDCheckIn": projectID,
-      "hw1Checkin": parseInt(hw1Checkin),
-      "hw2Checkin": parseInt(hw2Checkin)
+      projectIDCheckIn: projectID,
+      hw1Checkin: parseInt(hw1Checkin),
+      hw2Checkin: parseInt(hw2Checkin),
     };
 
-    fetch('/hwcheckin', {
-      method: 'POST',
+    fetch("/hwcheckin", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(checkinData)
+      body: JSON.stringify(checkinData),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         // Handle the hardware check-in response data here
         setResult(data);
       })
-      .catch(error => {
+      .catch((error) => {
         // Handle any error that occurs during the API call
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   };
 
   return (
     <div>
-      <input type="text" value={projectID} onChange={e => setProjectID(e.target.value)} />
-      <input type="text" value={hw1Checkin} onChange={e => setHw1Checkin(e.target.value)} />
-      <input type="text" value={hw2Checkin} onChange={e => setHw2Checkin(e.target.value)} />
+      <input
+        type="text"
+        value={projectID}
+        onChange={(e) => setProjectID(e.target.value)}
+      />
+      <input
+        type="text"
+        value={hw1Checkin}
+        onChange={(e) => setHw1Checkin(e.target.value)}
+      />
+      <input
+        type="text"
+        value={hw2Checkin}
+        onChange={(e) => setHw2Checkin(e.target.value)}
+      />
       <button onClick={handleHardwareCheckin}>Hardware Check-in</button>
-      {result && (
-        <div>
-          {/* Render the result data here */}
-        </div>
-      )}
+      {result && <div>{/* Render the result data here */}</div>}
     </div>
   );
 };
 
 export default HardwareCheckinComponent;
 ```
-
-
 
 ### 6. User Query Endpoint
 
@@ -276,47 +280,51 @@ export default HardwareCheckinComponent;
 **Usage Example (React.js - Fetch API):**
 
 ```jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const UserQueryComponent = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [result, setResult] = useState(null);
 
   const handleUserQuery = () => {
     const userData = {
-      "username": username,
-      "password": password
+      username: username,
+      password: password,
     };
 
-    fetch('/queryuser', {
-      method: 'POST',
+    fetch("/queryuser", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(userData)
+      body: JSON.stringify(userData),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         // Handle the user query response data here
         setResult(data);
       })
-      .catch(error => {
+      .catch((error) => {
         // Handle any error that occurs during the API call
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   };
 
   return (
     <div>
-      <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-      <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
       <button onClick={handleUserQuery}>Query User</button>
-      {result && (
-        <div>
-          {/* Render the result data here */}
-        </div>
-      )}
+      {result && <div>{/* Render the result data here */}</div>}
     </div>
   );
 };
@@ -342,20 +350,20 @@ export default UserQueryComponent;
 **Usage Example (React.js - Fetch API):**
 
 ```jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const LogoutComponent = () => {
   const handleLogout = () => {
-    fetch('/logout', {
-      method: 'POST'
+    fetch("/logout", {
+      method: "POST",
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         // Handle the logout response data here
       })
-      .catch(error => {
+      .catch((error) => {
         // Handle any error that occurs during the API call
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   };
 
@@ -380,32 +388,26 @@ export default LogoutComponent;
 **Usage Example (React.js - Fetch API):**
 
 ```jsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 const UserInfoComponent = () => {
   const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
-    fetch('/user_info')
-      .then(response => response.json())
-      .then(data => {
+    fetch("/user_info")
+      .then((response) => response.json())
+      .then((data) => {
         // Handle the user information data here
         setUserInfo(data);
       })
-      .catch(error => {
+      .catch((error) => {
         // Handle any error that occurs during the API call
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   }, []);
 
   return (
-    <div>
-      {userInfo && (
-        <div>
-          {/* Render the user information here */}
-        </div>
-      )}
-    </div>
+    <div>{userInfo && <div>{/* Render the user information here */}</div>}</div>
   );
 };
 
@@ -423,47 +425,51 @@ export default UserInfoComponent;
 **Usage Example (React.js - Fetch API):**
 
 ```jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const NewUserComponent = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [result, setResult] = useState(null);
 
   const handleNewUser = () => {
     const newUser = {
-      "username": username,
-      "password": password
+      username: username,
+      password: password,
     };
 
-    fetch('/newuser', {
-      method: 'POST',
+    fetch("/newuser", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(newUser)
+      body: JSON.stringify(newUser),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         // Handle the new user creation response data here
         setResult(data);
       })
-      .catch(error => {
+      .catch((error) => {
         // Handle any error that occurs during the API call
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   };
 
   return (
     <div>
-      <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-      <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
       <button onClick={handleNewUser}>Create New User</button>
-      {result && (
-        <div>
-          {/* Render the result data here */}
-        </div>
-      )}
+      {result && <div>{/* Render the result data here */}</div>}
     </div>
   );
 };
@@ -482,4 +488,3 @@ export default NewUserComponent;
 - **Description:** Handles 404 errors and serves the `index.html` file.
 
 Frontend developers can use these APIs to interact with the backend server and build a comprehensive frontend application that manages projects and hardware effectively.
-
