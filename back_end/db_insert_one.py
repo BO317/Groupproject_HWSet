@@ -1,4 +1,4 @@
-# import datetime
+# Just for test
 from pymongo import MongoClient
 import certifi
 import constants

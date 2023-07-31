@@ -7,8 +7,6 @@ function Login() {
       <Container>
         <h1>Welcome to Hardware Management System</h1>
         <UserForm></UserForm>
-        {/* <NewUserForm></NewUserForm> */}
-        {/* <Users users={data}></Users> */}
       </Container>
     </div>
   );

@@ -1,46 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "semantic-ui-react";
 
 function HWButton() {
-  const [data, setData] = useState([{}]);
+  // State to store the fetched data
+  const [result, setResult] = useState([{}]);
 
-  const [message, setMessage] = useState("");
+  // Function to fetch hardware data from the server
+  const fetchdata = () => {
+    fetch("/hardware")
+      .then((res) => res.json())
+      .then((data) => {
+        // If the fetched data is different from the current result, update the state
+        if (JSON.stringify(data) !== JSON.stringify(result)) {
+          setResult(data);
+        }
+      });
+  };
 
+  // useEffect hook to fetch data initially and at regular intervals
   useEffect(() => {
-    setMessage(
-      <div className="col">
-        <h1>Current hardware resource:</h1>
-        {data.map((hw) => (
-          <div>
-            <p>Hardware: {hw.hwID}</p>
-            <p>Availability: {hw.availability}</p>
-            <p>Capacity: {hw.capacity}</p>
-            <p>Checkedout:{hw.checkedout}</p>
-            <hr></hr>
-          </div>
-        ))}
-      </div>
-    );
-  }, [data]);
+    // Fetch data initially
+    fetchdata();
+
+    // Fetch data every 2 seconds and store the interval ID directly
+    const intervalID = setInterval(fetchdata, 2000);
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(intervalID);
+  }, []);
 
   return (
     <div>
-      <Button
-        onClick={async () => {
-          fetch("/hardware")
-            .then((res) => res.json())
-            .then((data) => {
-              setData(data);
-              console.log(data);
-            });
-
-          console.log(message);
-        }}
-      >
-        {" "}
-        Check HW
-      </Button>
-      {message}
+      <h1>Current hardware resource:</h1>
+      {result.map((hw) => (
+        <div key={hw.hwID}>
+          <p>Hardware: {hw.hwID}</p>
+          <p>Availability: {hw.availability}</p>
+          <p>Capacity: {hw.capacity}</p>
+          <p>Checkedout: {hw.checkedout}</p>
+          <hr></hr>
+        </div>
+      ))}
     </div>
   );
 }
