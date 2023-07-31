@@ -2,16 +2,20 @@ import React, { useState, useEffect } from "react";
 import { Form, Input, Button } from "semantic-ui-react";
 
 export const NewProject = () => {
+  // State for the projectID input field
   const [projectID, setProjectID] = useState("");
-  // const [password, setPassword] = useState("");
 
+  // State to store the data from the server response
   const [data, setData] = useState([{}]);
 
+  // State to handle the message displayed based on the server response
   const [message, setMessage] = useState("");
 
+  // useEffect to check the data state changes and update the message accordingly
   useEffect(() => {
     if (data.restatus === 1) {
       console.log("good");
+      // Display "Good!" if data.restatus is 1
       setMessage(
         <div>
           <p>Good!</p>
@@ -19,6 +23,7 @@ export const NewProject = () => {
       );
     } else if (data.restatus === 0) {
       console.log("wrong");
+      // Display "Project ID exist" if data.restatus is 0
       setMessage(
         <div>
           <p>Project ID exist</p>
@@ -36,14 +41,15 @@ export const NewProject = () => {
             placeholder="project ID"
             value={projectID}
             onChange={(e) => setProjectID(e.target.value)}
-          ></Input>
-          {/* <Input placeholder = 'password' value ={password} onChange ={e => setPassword(e.target.value)}></Input> */}
+          />
+          {/* <Input placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} /> */}
         </Form.Field>
         <Form.Field>
           <Button
             onClick={async () => {
               const project = { projectID };
 
+              // Send a POST request to the server with project data and update the data state with the server response
               fetch("/newproject", {
                 method: "POST",
                 headers: {
@@ -66,7 +72,7 @@ export const NewProject = () => {
         </Form.Field>
       </Form>
 
-      {message}
+      {message} {/* Display the message based on the server response */}
     </div>
   );
 };
