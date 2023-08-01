@@ -21,6 +21,16 @@ export const ProjectForm = () => {
           <p>Project ID : {data.pID}</p>
           <p>hw1_checked : {data.hw1_checked}</p>
           <p>hw2_checked : {data.hw2_checked}</p>
+          <p>Owner : {data.owner}</p>
+          <p>Member: </p>
+          <ol>
+
+            {data.member.map((member) => (
+
+              <li>{member}</li>
+            ))}
+          </ol>
+
         </div>
       );
     } else if (data.restatus === 0) {
