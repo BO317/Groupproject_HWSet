@@ -82,7 +82,12 @@ const NewProjectComponent = () => {
         onChange={(e) => setProjectID(e.target.value)}
       />
       <button onClick={handleCreateProject}>Create Project</button>
-      {result && <div>{/* Render the result data here */}</div>}
+      {result && (
+        <div>
+          {/* Render the result data here */}
+          <p>Result: {JSON.stringify(result)}</p>
+        </div>
+      )}
     </div>
   );
 };
@@ -93,7 +98,7 @@ export default NewProjectComponent;
 ### 3. Project Query Endpoint
 
 - **Endpoint:** `/queryproject`
-- **Description:** Allows clients to query existing projects based on the provided project ID.
+- **Description:** Allows clients to query existing projects based on the provided project ID and join the current user to the project in the database.
 - **Method:** POST
 - **Input:** JSON data in the POST request body containing the `projectID` key.
 - **Output:** Returns JSON data representing the queried project information. The output includes a key `restatus` indicating the success or failure of the query.
@@ -136,7 +141,12 @@ const QueryProjectComponent = () => {
         onChange={(e) => setProjectID(e.target.value)}
       />
       <button onClick={handleQueryProject}>Query Project</button>
-      {projectData && <div>{/* Render the project data here */}</div>}
+      {projectData && (
+        <div>
+          {/* Render the project data here */}
+          <p>Project Data: {JSON.stringify(projectData)}</p>
+        </div>
+      )}
     </div>
   );
 };

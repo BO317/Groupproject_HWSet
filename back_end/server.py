@@ -68,28 +68,29 @@ def giveHardware():
 
 
 # API: /newproject
-# Description: Enables clients to create a new project.
+# Description: Enables clients to create a new project. The current logged-in user is set as the owner of the project.
 # Input: JSON data in the POST request body containing the projectID key.
-# Output: Returns JSON data representing the result of creating a new project. The output includes a key restatus indicating the success or failure of the operation.
+# Output: Returns JSON data representing the result of creating a new project. The output includes a key 'restatus' indicating the success or failure of the operation.
 @app.route('/newproject', methods=['POST'])
 def newProject():
     myquery = request.get_data(as_text=True)
     myquery = json.loads(myquery)
     p_ID = str(myquery["projectID"])
-    data = db_project.create_project(p_ID, project)
+    data = db_project.create_project(p_ID, current_user.id, project)
     return data
 
-
 # API: /queryproject
-# Description: Allows clients to query existing projects based on the provided project ID.
+# Description: Allows clients to query existing projects based on the provided project ID and join the current user to the project in the database.
 # Input: JSON data in the POST request body containing the projectID key.
-# Output: Returns JSON data representing the queried project information. The output includes a key restatus indicating the success or failure of the query.
+# Output: Returns JSON data representing the queried project information. The output includes a key 'restatus' indicating the success or failure of the query.
+
+
 @app.route('/queryproject', methods=['POST'])
 def queryProject():
     myquery = request.get_data(as_text=True)
     myquery = json.loads(myquery)
     p_ID = str(myquery["projectID"])
-    data = db_project.query_project(p_ID, project)
+    data = db_project.query_project(p_ID, project, current_user.id)
     return data
 
 
@@ -203,6 +204,10 @@ def newUser():
     myquery = json.loads(myquery)
     data = db_user.create_user(myquery, user)
     return data
+
+
+def joinProject(p_ID, user):
+    pass
 
 
 # Start the Flask application on the specified host and port

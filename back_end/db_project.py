@@ -2,14 +2,41 @@
 import db_hardware
 # import copy
 
+# Function to join a user to an existing project in the database
+
+
+def joinProject(pjt_id, project_collection, newmember):
+    try:
+        myquery = {"pID": pjt_id}
+        newvalues = {"$addToSet": {"member": newmember}}
+        project_collection.update_one(myquery, newvalues)
+        return {'restatus': 1, 'message': "Joined the project."}
+    except:
+        return {'restatus': 0, 'message': "Failed to join the project"}
+
+    # result = query_project(pjt_id, project_collection, newmember)
+    # if result['restatus'] == 1:
+    #     if newmember in result["member"]:
+    #         return {'restatus': 0, 'message': "This user is already a mamber"}
+    #     else:
+    #         myquery = {"pID": pjt_id}
+    #         newvalues = {"$addToSet": {"member": newmember}}
+    #         project_collection.update_one(myquery, newvalues)
+    #         return {'restatus': 1, 'message': "Joined the project."}
+    # else:
+    #     return {'restatus': 0, 'message': "No project found"}
 
 # Function to create a new project document in the database
-def create_project(p_id, project):
+
+
+def create_project(p_id, owner, project):
     # Creating a new project document with the provided project ID and initial checked hardware counts set to 0
     projectDocument = {
         "pID": p_id,
         "hw1_checked": 0,
-        "hw2_checked": 0
+        "hw2_checked": 0,
+        "owner": owner,
+        "member": [owner]
     }
     myquery = {"pID": p_id}
     x = project.find_one(myquery)
@@ -29,17 +56,19 @@ def create_project(p_id, project):
 
 
 # Function to query project information from the database based on the provided project ID
-def query_project(p_id, project):
+def query_project(p_id, project, current_user):
     restatus = {'restatus': 0}  # Default status set to 0 (no project found)
     myquery = {"pID": p_id}
     try:
         # Querying the project information from the 'project' collection
         data = project.find_one(myquery)
-        # Removing the '_id' field from the document to make it more readable
+    # Removing the '_id' field from the document to make it more readable
         data.pop('_id')
-        # Setting status to 1 to indicate a successful query
+    # Setting status to 1 to indicate a successful query
+        joinProject(p_id, project, current_user)
         restatus['restatus'] = 1
-    except:
+    except Exception as inst:
+        print(inst)
         return restatus  # Return the status (no project found)
     # Merging the status with the retrieved project data
     data = {**restatus, **data}
@@ -48,7 +77,6 @@ def query_project(p_id, project):
 
 # Function to update project information in the database
 def update_project(new_data, project):
-    print("1111")
     myquery = {"pID": new_data['pID']}
     newvalues = {
         "$set": {
