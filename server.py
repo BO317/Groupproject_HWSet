@@ -104,7 +104,7 @@ def checkout():
     p_ID = str(myquery["projectIDCheckout"])
     x1 = int(myquery["hw1Checkout"])
     x2 = int(myquery["hw2Checkout"])
-    p = db_project.query_project(p_ID, project)
+    p = db_project.query_project(p_ID, project, current_user.id)
     if p['restatus'] == 0:
         data = {"restatus": 0}
         return data
@@ -126,7 +126,7 @@ def hw_checkin():
     p_ID = str(myquery["projectIDCheckIn"])
     x1 = int(myquery["hw1Checkin"])
     x2 = int(myquery["hw2Checkin"])
-    p = db_project.query_project(p_ID, project)
+    p = db_project.query_project(p_ID, project, current_user.id)
     if p['restatus'] == 1:
         if x1 > p["hw1_checked"] or x2 > p["hw1_checked"]:
             data = {"restatus": 0,
@@ -203,10 +203,6 @@ def newUser():
     myquery = json.loads(myquery)
     data = db_user.create_user(myquery, user)
     return data
-
-
-def joinProject(p_ID, user):
-    pass
 
 
 # Start the Flask application on the specified host and port
