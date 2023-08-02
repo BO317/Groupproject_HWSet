@@ -20,8 +20,8 @@ export const NewUserForm = () => {
       setMessage("new user created"); // Set the success message if data.restatus is 1
       console.log("new user created");
     } else if (data.restatus === 0) {
-      setMessage("username exist"); // Set the message if data.restatus is 0
-      console.log("username exist");
+      setMessage(data.message); // Set the message if data.restatus is 0
+      console.log(data.message);
     } else {
       // Additional handling for other cases (not specified in the code)
     }

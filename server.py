@@ -1,8 +1,6 @@
 from flask import Flask, request, jsonify
-from back_end import db_user
+from back_end import db_user, db_hardware, db_project
 import json
-from back_end import db_hardware
-from back_end import db_project
 import certifi
 from pymongo import MongoClient
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -147,15 +145,24 @@ def hw_checkin():
 # Output: Returns JSON data representing the queried user information. The output includes a key restatus indicating the success or failure of the query.
 @app.route('/queryuser', methods=['POST'])
 def queryUser():
-    myquery = request.get_data(as_text=True)
-    myquery = json.loads(myquery)
-    data = db_user.db_query_user(myquery, user)
-    if data['restatus'] == 1:
-        user1 = User()
-        user1.id = data["username"]
-        login_user(user1)
-        return jsonify(data), 200
-    return data
+    try:
+        myquery = request.get_data(as_text=True)
+        myquery = json.loads(myquery)
+        print(myquery)
+        myquery['password'] = db_user.customEncrypt(
+            myquery['password'])['encryptedText']
+        print(myquery)
+        data = db_user.db_query_user(myquery, user)
+        if data['restatus'] == 1:
+            user1 = User()
+            user1.id = data["username"]
+            login_user(user1)
+            return jsonify(data), 200
+        print(data)
+        return data
+    except:
+        data = {"restatus": 0}
+        return data
 
 
 # Function: user_loader(username)
