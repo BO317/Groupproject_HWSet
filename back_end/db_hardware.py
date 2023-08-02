@@ -1,6 +1,6 @@
 # import datetime
 # Importing the HWSet class from the hardwareSet module
-from hardwareSet import HWSet
+from back_end import hardwareSet
 
 
 # Function to create a new hardware document in the database
@@ -53,7 +53,7 @@ def ini_hardware(id, hardware):
     # Querying the hardware information from the database based on the provided ID
     x = query_hardware(id, hardware)
     # Creating a new HWSet object with the retrieved information
-    return HWSet(id, x['capacity'], x['availability'])
+    return hardwareSet.HWSet(id, x['capacity'], x['availability'])
 
 
 # Function to synchronize the HWSet object with the latest hardware information from the database

@@ -1,5 +1,5 @@
 # Importing the db_hardware module
-import db_hardware
+from back_end import db_hardware
 # import copy
 
 # Function to join a user to an existing project in the database

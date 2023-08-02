@@ -1,9 +1,8 @@
 from flask import Flask, request, jsonify
-import db_user
+from back_end import db_user
 import json
-from hardwareSet import HWSet
-import db_hardware
-import db_project
+from back_end import db_hardware
+from back_end import db_project
 import certifi
 from pymongo import MongoClient
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -23,7 +22,7 @@ project = db.projects
 
 
 # Create a Flask application
-app = Flask(__name__, static_folder='../front_end/build', static_url_path='/')
+app = Flask(__name__, static_folder='./front_end/build', static_url_path='/')
 app.secret_key = 'your_secret_key'
 
 
