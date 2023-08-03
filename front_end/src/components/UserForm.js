@@ -54,6 +54,7 @@ export const UserForm = () => {
           <Input
             placeholder="password"
             value={password}
+            type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Field>
@@ -73,7 +74,6 @@ export const UserForm = () => {
                 .then((response) => response.json())
                 .then((data) => {
                   setData(data);
-                  console.log(data);
                 });
             }}
           >
