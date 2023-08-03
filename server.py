@@ -126,7 +126,7 @@ def hw_checkin():
     x2 = int(myquery["hw2Checkin"])
     p = db_project.query_project(p_ID, project, current_user.id)
     if p['restatus'] == 1:
-        if x1 > p["hw1_checked"] or x2 > p["hw1_checked"]:
+        if x1 > p["hw1_checked"] or x2 > p["hw2_checked"]:
             data = {"restatus": 0,
                     "message": "Required checkin amount exceeds the project's current checked amount."}
             return data
