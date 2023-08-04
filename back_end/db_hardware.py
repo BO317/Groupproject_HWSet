@@ -42,7 +42,9 @@ def update_hardware(hw, hardware):
     print("new_values", newvalues)
     try:
         # Updating the hardware document with the new values
+        print("HW DB pervious vaules: ", hardware.find_one(myquery))
         hardware.update_one(myquery, newvalues)
+        print("HW DB current vaules: ", hardware.find_one(myquery))
         return 1  # Return 1 to indicate a successful update
     except:
         return 0  # Return 0 to indicate a failed update
