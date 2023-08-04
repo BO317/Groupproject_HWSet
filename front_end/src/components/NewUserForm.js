@@ -17,19 +17,21 @@ export const NewUserForm = () => {
   // useEffect to check the data state changes and update the message accordingly
   useEffect(() => {
     if (data.restatus === 1) {
+      alert("new user created");
       setMessage("new user created"); // Set the success message if data.restatus is 1
       console.log("new user created");
     } else if (data.restatus === 0) {
+      alert(data.message);
       setMessage(data.message); // Set the message if data.restatus is 0
       console.log(data.message);
     } else {
-      // Additional handling for other cases (not specified in the code)
+      // Additional handling for other cases 
     }
   }, [data]);
 
   return (
     <div>
-      {message} {/* Display the message based on the server response */}
+      {/* {message} Display the message based on the server response */}
       <Form>
         <Form.Field>
           <Input
@@ -69,7 +71,7 @@ export const NewUserForm = () => {
                 .then((response) => response.json())
                 .then((data) => {
                   setData(data);
-                  console.log(data);
+
                 });
 
               console.log(data.dbstatus);
