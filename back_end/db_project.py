@@ -95,12 +95,14 @@ def update_project(new_data, project):
 
 # Function to perform hardware checkout for a project
 def project_check(hw1, hw2, p, x1, x2, hardware, project):
+    print("check out test!!!!!!!!")
+    print(x1, x2, "hw1", hw1.get_availability(), "hw2", hw2.get_availability())
     # orgin_hw1 = copy.deepcopy(hw1)
     # orgin_hw2 = copy.deepcopy(hw2)
     re1 = hw1.check_out(x1)  # Checking out hardware 1 for the project
     re2 = hw2.check_out(x2)  # Checking out hardware 2 for the project
 
-    print("check out test!!!!!!!!")
+    print("check out test  again!!!!!!!!")
     print("p", p, re1, re2)
     print(x1, x2, "hw1", hw1.get_availability(), "hw2", hw2.get_availability())
 
@@ -135,9 +137,11 @@ def project_check(hw1, hw2, p, x1, x2, hardware, project):
 
 # Function to perform hardware check-in for a project
 def hardware_check_in(hw1, hw2, p, x1, x2, hardware, project):
+    print("check in test old!!!!!!!!")
+    print(x1, x2, "hw1", hw1.get_availability(), "hw2", hw2.get_availability())
     re1 = hw1.check_in(x1)  # Checking in hardware 1 for the project
     re2 = hw2.check_in(x2)  # Checking in hardware 2 for the project
-    print("check in test!!!!!!!!")
+    print("check in test new!!!!!!!!")
     print("p", p, re1, re2)
     print(x1, x2, "hw1", hw1.get_availability(), "hw2", hw2.get_availability())
 
