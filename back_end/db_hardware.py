@@ -63,10 +63,7 @@ def sync_hardware(id, hardware, hw):
     # Querying the hardware information from the database based on the provided ID
     x = query_hardware(id, hardware)
     # Updating the HWSet object with the latest information from the database
-    hw.capacity = x['capacity']
-    hw.availability = x['availability']
-    hw.availability = x['availability']
-    hw.checkedout = x['checkedout']
+    hw.set_new_values(x['capacity'], x['availability'], x['checkedout'])
 
     # Returning a dictionary with the 'restatus' key set to 1 to indicate success
     return {"restatus": 1}

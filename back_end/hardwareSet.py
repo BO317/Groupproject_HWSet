@@ -24,6 +24,11 @@ class HWSet:
         # accessor function to return the total number of checkout quantities
         return self.__checkedout
 
+    def set_new_values(self, c, a, co):
+        self.__capacity = c
+        self.__availability = a
+        self.__checkedout = co
+
     def check_out(self, qty):
         """method that checks out number of units specified by qty. 
         This method should update the number of units available after check_out. 
