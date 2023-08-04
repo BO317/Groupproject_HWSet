@@ -14,17 +14,6 @@ def joinProject(pjt_id, project_collection, newmember):
     except:
         return {'restatus': 0, 'message': "Failed to join the project"}
 
-    # result = query_project(pjt_id, project_collection, newmember)
-    # if result['restatus'] == 1:
-    #     if newmember in result["member"]:
-    #         return {'restatus': 0, 'message': "This user is already a mamber"}
-    #     else:
-    #         myquery = {"pID": pjt_id}
-    #         newvalues = {"$addToSet": {"member": newmember}}
-    #         project_collection.update_one(myquery, newvalues)
-    #         return {'restatus': 1, 'message': "Joined the project."}
-    # else:
-    #     return {'restatus': 0, 'message': "No project found"}
 
 # Function to create a new project document in the database
 
@@ -101,8 +90,7 @@ def project_check(hw1, hw2, p, x1, x2, hardware, project):
     re_hw1 = db_hardware.sync_hardware('001', hardware, hw1)
     re_hw2 = db_hardware.sync_hardware('002', hardware, hw2)
     print(x1, x2, "hw1", hw1.get_availability(), "hw2", hw2.get_availability())
-    # orgin_hw1 = copy.deepcopy(hw1)
-    # orgin_hw2 = copy.deepcopy(hw2)
+
     re1 = hw1.check_out(x1)  # Checking out hardware 1 for the project
     re2 = hw2.check_out(x2)  # Checking out hardware 2 for the project
 
