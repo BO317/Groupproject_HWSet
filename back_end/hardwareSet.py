@@ -32,8 +32,10 @@ class HWSet:
         the current availability in the following manner: 
         Not allow users to check out the number of units that are available and then return 0"""
         if qty <= self.__availability:
+            print("hw instance Old value", self.__availability)
             self.__availability -= qty
             self.__checkedout += qty
+            print("hw instance New value", self.__availability)
             return 1
         else:
             # self.__checkedout += self.__availability
@@ -43,8 +45,10 @@ class HWSet:
     def check_in(self, qty):
         """method that checks in number of units specified by qty. 
         This method should update the number of units available after check_in."""
+        print("hw instance Old value", self.__availability)
         self.__availability += qty
         self.__checkedout -= qty
+        print("hw instance New value", self.__availability)
 
         if self.__availability > self.__capacity:
             self.__availability = self.__capacity
