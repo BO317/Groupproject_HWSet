@@ -99,7 +99,10 @@ def project_check(hw1, hw2, p, x1, x2, hardware, project):
     # orgin_hw2 = copy.deepcopy(hw2)
     re1 = hw1.check_out(x1)  # Checking out hardware 1 for the project
     re2 = hw2.check_out(x2)  # Checking out hardware 2 for the project
+
+    print("check out test!!!!!!!!")
     print("p", p, re1, re2)
+    print(x1, x2, "hw1", hw1.get_availability(), "hw2", hw2.get_availability())
 
     if re1 == 1 and re2 == 1:  # If hardware 1 and 2 checkout are successful
         try:
@@ -134,7 +137,9 @@ def project_check(hw1, hw2, p, x1, x2, hardware, project):
 def hardware_check_in(hw1, hw2, p, x1, x2, hardware, project):
     re1 = hw1.check_in(x1)  # Checking in hardware 1 for the project
     re2 = hw2.check_in(x2)  # Checking in hardware 2 for the project
+    print("check in test!!!!!!!!")
     print("p", p, re1, re2)
+    print(x1, x2, "hw1", hw1.get_availability(), "hw2", hw2.get_availability())
 
     if re1 == 1 and re2 == 1:  # If hardware 1 and 2 check-in are successful
         try:
